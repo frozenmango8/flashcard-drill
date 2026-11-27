@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Spaced-repetition flashcards that stay in your browser."
+    />
+    <meta name="theme-color" content="#e7e1d6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#141311" media="(prefers-color-scheme: dark)" />
+    <title>Flashcard Drill</title>
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("flashcard-drill-theme");
+          var dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          var mode = stored === "light" || stored === "dark" ? stored : dark ? "dark" : "light";
+          document.documentElement.dataset.theme = mode;
+        } catch (error) {
+          /* storage can be blocked */
+        }
+      })();
+    </script>
+    <style>
+      html { background: #e7e1d6; }
+      html[data-theme="dark"] { background: #141311; }
+    </style>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='1.5' y='2.5' width='13' height='11' fill='%23f6f3ec' stroke='%231e1a16'/%3E%3Cpath d='M1.5 5.5h13' stroke='%239c3b2e'/%3E%3C/svg%3E"
+    />
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
