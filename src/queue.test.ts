@@ -67,6 +67,12 @@ describe("studyQueue", () => {
     const lapsed = applyGrade(introduced, "again", "2026-04-02");
     expect(lapsed.introduced).toBe("2026-04-01");
     expect(lapsed.repetitions).toBe(0);
-    expect(lapsed.due).toBe("2026-04-03");
+    expect(lapsed.due).toBe("2026-04-02");
+  });
+
+  it("keeps a failed card in today's queue", () => {
+    const failed = applyGrade(card({ id: "n" }), "again", "2026-04-01");
+    const queued = studyQueue(deck([failed, card({ id: "n2" })], 20), "2026-04-01");
+    expect(queued.map((item) => item.id)).toEqual(["n", "n2"]);
   });
 });

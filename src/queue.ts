@@ -30,7 +30,8 @@ export function applyGrade(card: Card, grade: Grade, today: string): Card {
     ease: next.ease,
     interval: next.interval,
     repetitions: next.repetitions,
-    due: addDays(today, next.interval),
+    // A lapse stays due today so Again means "now", not "come back tomorrow".
+    due: grade === "again" ? today : addDays(today, next.interval),
     introduced: learning ? today : card.introduced,
   };
 }
